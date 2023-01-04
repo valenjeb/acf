@@ -1,0 +1,30 @@
+{
+  "name": "devly/acf",
+  "description": "Register ACF fields using OOP.",
+  "version": "0.1.0",
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "autoload": {
+    "psr-4": {
+      "Devly\\ACF\\": "src"
+    }
+  },
+  "require": {
+    "php": "^7.4"
+  },
+  "require-dev": {
+    "dealerdirect/phpcodesniffer-composer-installer": "^0.7.0",
+    "devly/coding-standard": "^1.0",
+    "php-parallel-lint/php-parallel-lint": "^1.2.0",
+    "php-stubs/wordpress-stubs": "^6.1",
+    "phpstan/phpstan": "^1.9",
+    "szepeviktor/phpstan-wordpress": "^1.1",
+    "wp-cli/i18n-command": "^2.2.5",
+    "wptrt/wpthemereview": "^0.2.1"
+  },
+  "config": {
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
+  }
+}
