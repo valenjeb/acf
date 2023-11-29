@@ -274,14 +274,12 @@ class FieldGroup extends FieldGroupBuilder
     /** @return array<array<string, mixed>> */
     protected function populateFields(): array
     {
-        if (! isset($this->fields)) {
-            return [];
-        }
-
         $fields = [];
 
-        foreach ($this->fields as $field) {
-            $fields[] = $field->populate();
+        if (isset($this->fields)) {
+            foreach ($this->fields as $field) {
+                $fields[] = $field->populate();
+            }
         }
 
         if (isset($this->importedFields)) {
