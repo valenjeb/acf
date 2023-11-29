@@ -18,7 +18,10 @@ use function in_array;
 use function is_array;
 use function sprintf;
 use function str_replace;
+use function trigger_error;
 use function ucwords;
+
+use const E_USER_DEPRECATED;
 
 class FieldGroup extends FieldGroupBuilder
 {
@@ -51,6 +54,8 @@ class FieldGroup extends FieldGroupBuilder
         $this->title   = $title ?? $this->generateLabel($key);
         $this->options = $options;
         $this->setParentContext($parentContext);
+
+        add_action('acf/init', [$this, 'registerFieldGroup']);
     }
 
     protected function generateLabel(string $key): string
@@ -237,9 +242,16 @@ class FieldGroup extends FieldGroupBuilder
         return $this;
     }
 
+    /** @deprecated since 0.1.1 */
     public function register(): void
     {
-        add_action('acf/init', [$this, 'registerFieldGroup']);
+        trigger_error(
+            sprintf(
+                'The %s::register() method is deprecated as of version 0.1.1 and will be removed in version 0.2.0',
+                __CLASS__
+            ),
+            E_USER_DEPRECATED
+        );
     }
 
     public function registerFieldGroup(): void
