@@ -109,7 +109,7 @@ class FieldGroup extends FieldGroupBuilder
         return $manager;
     }
 
-    public function active(bool $active): self
+    public function active(bool $active = true): self
     {
         $this->active = $active;
 
@@ -126,7 +126,7 @@ class FieldGroup extends FieldGroupBuilder
     /**
      * Whether to show the metabox value in rest responses.
      */
-    public function showInRest(bool $show): self
+    public function showInRest(bool $show = true): self
     {
         $this->showInRest = $show ? 1 : 0;
 
