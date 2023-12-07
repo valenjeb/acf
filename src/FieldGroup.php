@@ -77,6 +77,20 @@ class FieldGroup extends FieldGroupBuilder
      * @param string|mixed $operatorOrValue
      * @param mixed        $value
      */
+    public function addLocation(string $param, $operatorOrValue, $value = null): LocationManager
+    {
+        if (func_num_args() === 2) {
+            $value           = $operatorOrValue;
+            $operatorOrValue = '==';
+        }
+
+        return $this->createLocationManager()->where($param, $operatorOrValue, $value);
+    }
+
+    /**
+     * @param string|mixed $operatorOrValue
+     * @param mixed        $value
+     */
     public function where(string $param, $operatorOrValue, $value = null): LocationManager
     {
         if (func_num_args() === 2) {
