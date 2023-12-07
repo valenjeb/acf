@@ -223,14 +223,6 @@ class OptionsPage
         } else {
             add_action('acf/init', [$this, 'addOptionsPage']);
         }
-
-        if (! isset($this->fieldGroups)) {
-            return;
-        }
-
-        foreach ($this->fieldGroups as $group) {
-            $group->register();
-        }
     }
 
     /** @return array<string, mixed> */
