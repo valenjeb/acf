@@ -67,7 +67,7 @@ class ConditionalLogicBuilder extends ParentDelegator
         return $this;
     }
 
-    /** @return array{field: string, operator: string, value: mixed} */
+    /** @return array<array{field: string, operator: string, value: mixed}> */
     public function getLogic(): array
     {
         return $this->logic;
