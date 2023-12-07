@@ -6,6 +6,11 @@ namespace Devly\ACF;
 
 class SharedFieldGroup extends FieldGroupBuilder
 {
+    public static function create(): self
+    {
+        return new self();
+    }
+
     /** @return array<array<string, mixed>> */
     public function populate(): array
     {

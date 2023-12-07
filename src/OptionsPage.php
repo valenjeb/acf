@@ -41,6 +41,12 @@ class OptionsPage
         ], $config);
     }
 
+    /** @param array<string, mixed> $config */
+    public static function create(string $key, array $config = []): self
+    {
+        return new self($key, $config);
+    }
+
     protected function getHumanFriendlyName(string $key): string
     {
         $key = str_replace('-', ' ', $key);

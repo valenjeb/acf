@@ -63,11 +63,7 @@ class FieldGroup extends FieldGroupBuilder
         return ucwords(str_replace('_', ' ', $key));
     }
 
-    /**
-     * @param array<string, mixed> $options
-     *
-     * @return static
-     */
+    /** @param array<string, mixed> $options */
     public static function create(string $key, ?string $title = null, array $options = []): self
     {
         return new self($key, $title, $options);
