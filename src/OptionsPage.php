@@ -39,6 +39,8 @@ class OptionsPage
             'capability'  => 'edit_posts',
             'redirect'    => false,
         ], $config);
+
+        add_action('acf/init', [$this, 'registerOptionsPage']);
     }
 
     /** @param array<string, mixed> $config */
@@ -221,14 +223,27 @@ class OptionsPage
 
     /**
      * Register the options page and its metaboxes.
+     *
+     * @deprecated
      */
     public function register(): void
     {
+        trigger_error(sprintf(
+            '%s::register() is deprecated. Options page are registered automatically on object creation.',
+            __CLASS__
+        ), E_USER_DEPRECATED);
+    }
+
+    /** @internal */
+    public function registerOptionsPage(): void
+    {
         if (isset($this->config['parent_slug'])) {
-            add_action('acf/init', [$this, 'addOptionsSubPage']);
-        } else {
-            add_action('acf/init', [$this, 'addOptionsPage']);
+            $this->addOptionsSubPage();
+
+            return;
         }
+
+        $this->addOptionsPage();
     }
 
     /** @return array<string, mixed> */
