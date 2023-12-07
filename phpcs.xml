@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<ruleset name="Devly WP Coding Standards">
+<ruleset name="Devly\ACF Coding Standards">
 	<!-- What to scan -->
 	<file>.</file>
 	<exclude-pattern>/vendor/</exclude-pattern>
@@ -16,10 +16,4 @@
 	<rule ref="Devly"/>
 
     <rule ref="WordPress.Security"/>
-
-	<rule ref="WordPress.WP.I18n">
-		<properties>
-			<property name="text_domain" type="array" value="themekit"/>
-		</properties>
-	</rule>
 </ruleset>
