@@ -49,17 +49,20 @@ class Number extends FieldBuilder
         return $this->set('append', $value);
     }
 
-    public function min(int $value): self
+    /** @param numeric $value */
+    public function min($value): self
     {
         return $this->set('min', $value);
     }
 
-    public function max(int $value): self
+    /** @param numeric $value */
+    public function max($value): self
     {
         return $this->set('max', $value);
     }
 
-    public function step(int $value): self
+    /** @param numeric $value */
+    public function step($value): self
     {
         return $this->set('step', $value);
     }
