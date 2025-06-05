@@ -42,6 +42,7 @@ class FieldGroup extends FieldGroupBuilder
     protected int $menuOrder;
     /** @var string[] */
     protected array $hideOnScreen;
+    protected bool $isRegistered = false;
 
     /** @param array<string, mixed> $options */
     public function __construct(string $key, ?string $title = null, array $options = [], ?object $parentContext = null)
@@ -55,7 +56,13 @@ class FieldGroup extends FieldGroupBuilder
         $this->options = $options;
         $this->setParentContext($parentContext);
 
-        add_action('acf/init', [$this, 'registerFieldGroup']);
+        add_action('acf/init', function () {
+            if ($this->isRegistered) {
+                return;
+            }
+
+            $this->registerFieldGroup();
+        }, PHP_INT_MAX);
     }
 
     protected function generateLabel(string $key): string
@@ -252,20 +259,17 @@ class FieldGroup extends FieldGroupBuilder
         return $this;
     }
 
-    /** @deprecated since 0.1.1 */
     public function register(): void
     {
-        trigger_error(
-            sprintf(
-                'The %s::register() method is deprecated as of version 0.1.1 and will be removed in version 0.2.0',
-                __CLASS__
-            ),
-            E_USER_DEPRECATED
-        );
+        $this->registerFieldGroup();
     }
 
     public function registerFieldGroup(): void
     {
+        if ($this->isRegistered) {
+            return;
+        }
+        
         if (! function_exists('acf_add_local_field_group')) {
             return;
         }
