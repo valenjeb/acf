@@ -22,6 +22,7 @@ class OptionsPage
 
     /** @var FieldGroup[] */
     protected array $fieldGroups;
+    protected bool $isRegistered = false;
 
     /** @param array<string, mixed> $config */
     public function __construct(string $key, array $config = [])
@@ -40,7 +41,14 @@ class OptionsPage
             'redirect'    => false,
         ], $config);
 
-        add_action('acf/init', [$this, 'registerOptionsPage']);
+        add_action('acf/init', function () {
+            if ($this->isRegistered) {
+                return;
+            }
+
+            $this->registerOptionsPage();
+        }, PHP_INT_MAX);
+        
     }
 
     /** @param array<string, mixed> $config */
@@ -234,9 +242,14 @@ class OptionsPage
         ), E_USER_DEPRECATED);
     }
 
-    /** @internal */
     public function registerOptionsPage(): void
     {
+        if ($this->isRegistered) {
+            return;    
+        }
+
+        $this->isRegistered = true;
+        
         if (isset($this->config['parent_slug'])) {
             $this->addOptionsSubPage();
 
